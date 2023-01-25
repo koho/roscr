@@ -2,8 +2,7 @@ FROM golang:latest
 
 RUN apt update && apt install jq -y
 
-RUN arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
-    wget -qO- $(curl --silent https://api.github.com/repos/coredns/coredns/releases/latest | jq -r '.tarball_url') | tar zxv
+RUN wget -qO- $(curl --silent https://api.github.com/repos/coredns/coredns/releases/latest | jq -r '.tarball_url') | tar zxv
 
 RUN cd coredns* && sed -i -e '/forward:forward/a\' -e 'chinadns:github.com/koho/coredns-chinadns' plugin.cfg && \
     go get github.com/koho/coredns-chinadns && make && cp ./coredns /coredns
