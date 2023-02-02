@@ -4,7 +4,7 @@ RUN apt update && apt install jq -y
 
 RUN wget -qO- $(curl --silent https://api.github.com/repos/coredns/coredns/releases/latest | jq -r '.tarball_url') | tar zxv
 
-RUN cd coredns* && sed -i -e '/forward:forward/a\' -e 'chinadns:github.com/koho/coredns-chinadns' plugin.cfg && \
+RUN cd coredns* && sed -i -e '/forward:forward/i\' -e 'chinadns:github.com/koho/coredns-chinadns' plugin.cfg && \
     go get github.com/koho/coredns-chinadns && make && cp ./coredns /coredns
 
 FROM alpine:latest
