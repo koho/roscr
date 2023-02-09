@@ -7,6 +7,8 @@ RUN wget -qO- $(curl --silent https://api.github.com/repos/coredns/coredns/relea
 RUN cd coredns* && sed -i -e '/forward:forward/i\' -e 'chinadns:github.com/koho/coredns-chinadns' plugin.cfg && \
     go get github.com/koho/coredns-chinadns && make && cp ./coredns /coredns
 
+FROM ghcr.io/koho/dns-board:latest
+
 FROM alpine:latest
 
 # Only need ca-certificates & openssl if want to use DNS over TLS (RFC 7858).
@@ -14,6 +16,10 @@ RUN apk --no-cache add ca-certificates openssl && update-ca-certificates
 
 COPY --from=0 /coredns /coredns
 
-EXPOSE 53 53/udp
+COPY --from=1 /dns-board /dns-board
 
-ENTRYPOINT ["/coredns"]
+COPY ./entrypoint.sh /entrypoint.sh
+
+EXPOSE 53 53/udp 80
+
+ENTRYPOINT ["/entrypoint.sh"]
