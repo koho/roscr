@@ -16,7 +16,7 @@ setup_iptables() {
     iptables -t nat -A CLASH -d 192.168.0.0/16 -j RETURN
     iptables -t nat -A CLASH -d 224.0.0.0/4 -j RETURN
     iptables -t nat -A CLASH -d 240.0.0.0/4 -j RETURN
-    iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports 7892
+    iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports ${REDIR_PORT=7892}
     iptables -t nat -A PREROUTING -p tcp -j CLASH
 }
 
