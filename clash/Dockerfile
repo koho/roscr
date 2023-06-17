@@ -4,4 +4,4 @@ RUN apk --no-cache add iptables
 
 COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]
