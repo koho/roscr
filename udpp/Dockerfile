@@ -8,4 +8,4 @@ FROM alpine:latest
 
 COPY --from=0 /udpp /udpp
 
-CMD ["/udpp"]
+ENTRYPOINT ["/udpp"]
