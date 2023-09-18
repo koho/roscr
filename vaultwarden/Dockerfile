@@ -13,4 +13,6 @@ COPY --from=0 /bakdav /usr/bin/bakdav
 
 COPY --from=0 /7zzs /usr/bin/7z
 
-RUN sed -i '$ibakdav -c /etc/backup.json' /start.sh
+RUN touch /etc/backup.json
+
+RUN sed -i '$ibakdav -c /etc/backup.json &' /start.sh
