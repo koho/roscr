@@ -1,4 +1,4 @@
-FROM dreamacro/clash-premium:2023.07.22
+FROM dreamacro/clash-premium:2023.08.17
 
 RUN apk --no-cache add iptables
 
