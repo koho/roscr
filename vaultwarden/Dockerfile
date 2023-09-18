@@ -4,7 +4,7 @@ RUN git clone https://github.com/koho/bakdav.git
 
 RUN cd bakdav && GO111MODULE=on CGO_ENABLED=0 go build -trimpath -ldflags "-s -w" -o /bakdav .
 
-RUN cd / && arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/x64/) && \
+RUN cd / && apt install xz-utils -y && arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/x64/) && \
     wget -qO- https://7-zip.org/a/7z2301-linux-$arch.tar.xz | tar Jx
 
 FROM vaultwarden/server:latest
