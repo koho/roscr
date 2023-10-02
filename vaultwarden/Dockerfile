@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN cd / && apt update && apt install xz-utils -y && arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/x64/) && \
+RUN cd / && apt update && apt install xz-utils wget -y && arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/x64/) && \
     wget -qO- https://7-zip.org/a/7z2301-linux-$arch.tar.xz | tar Jx
 
 FROM vaultwarden/server:latest
