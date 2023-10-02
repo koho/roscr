@@ -12,3 +12,7 @@ RUN apt update && apt install jq -y
 COPY ./backup.sh /backup.sh
 
 RUN sed -i '$ibash /backup.sh &' /start.sh
+
+ENV ROCKET_ADDRESS=127.0.0.1
+
+ENV ROCKET_PORT=8000
