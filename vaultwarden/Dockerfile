@@ -7,7 +7,7 @@ FROM vaultwarden/server:latest
 
 COPY --from=0 /7zzs /usr/bin/7z
 
-RUN apt update && apt install jq -y
+RUN apt update && apt install awscli less -y
 
 COPY ./backup.sh /backup.sh
 
