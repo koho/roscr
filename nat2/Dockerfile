@@ -10,4 +10,6 @@ RUN apt update && apt install openssl ca-certificates -y
 
 COPY --from=0 /nat2/target/release/nat2 /nat2
 
+ENV NO_COLOR=true
+
 ENTRYPOINT ["/nat2"]
