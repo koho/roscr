@@ -6,6 +6,8 @@ RUN cd nat2 && cargo build --release
 
 FROM debian:bookworm
 
+RUN apt update && apt install openssl -y
+
 COPY --from=0 /nat2/target/release/nat2 /nat2
 
 ENTRYPOINT ["/nat2"]
