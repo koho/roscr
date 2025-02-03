@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
 
-. /backup/backup.config
+[ -f /etc/backup.conf ] && . /etc/backup.conf || return 1
 
 backup () {
-  [ -z "$filename" ] && return 1
-  [ -z "$bucket" ] && return 1
-  [ -z "$interval" ] && interval=86400
+  [ -z "$BAK_INTERVAL" ] && BAK_INTERVAL=86400
 
   # backup files
   backup_file="/tmp/vw_$RANDOM.7z"
-  7z a -p$password -mhe=on $backup_file /data/*
+  7z a -p$BAK_PASSWORD -mhe=on $backup_file /data/*
 
   # upload file
-  aws s3api put-object --bucket $bucket --key $filename --body $backup_file --endpoint-url "$url"
+  aws s3api put-object --bucket $AWS_BUCKET --key $AWS_FILENAME --body $backup_file --endpoint-url "$AWS_URL"
 
   # delete backup file
   rm -rf $backup_file
 }
 
-while true; do backup; sleep $interval; done
+while true; do backup; sleep $BAK_INTERVAL; done
