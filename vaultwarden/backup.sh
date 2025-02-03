@@ -10,7 +10,7 @@ backup () {
   7z a -p$BAK_PASSWORD -mhe=on $backup_file /data/*
 
   # upload file
-  aws s3api put-object --bucket $AWS_BUCKET --key $AWS_FILENAME --body $backup_file --endpoint-url "$AWS_URL"
+  AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY aws s3api put-object --bucket $AWS_BUCKET --key $AWS_FILENAME --body $backup_file --endpoint-url "$AWS_URL"
 
   # delete backup file
   rm -rf $backup_file
