@@ -1,4 +1,4 @@
-FROM rust:latest
+FROM rust:bookworm
 
 RUN git clone https://github.com/koho/nat2.git
 
