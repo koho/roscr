@@ -1,5 +1,5 @@
 mode: global
-redir-port: 7892
+tproxy-port: 7893
 allow-lan: true
 log-level: error
 external-controller: 0.0.0.0:80
@@ -11,7 +11,3 @@ dns:
   enable: true
   nameserver:
     - '223.5.5.5#eth0'
-
-tun:
-  enable: true
-  stack: system
