@@ -11,4 +11,4 @@ ip rule add fwmark 1 table 100
 ip route add local default dev lo table 100
 nft -f /rules.conf
 
-exec /clash $@
+exec /mihomo $@
